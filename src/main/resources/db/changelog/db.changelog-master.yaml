@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/changes/create-users-table.yaml
   - include:
       file: db/changelog/changes/insert-manager-role.yaml
+  - include:
+      file: db/changelog/changes/create-cars-table.yaml
