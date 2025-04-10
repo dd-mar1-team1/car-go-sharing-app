@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sharing.app.com.dto.user.RoleUpdateRequestDto;
 import sharing.app.com.dto.user.UserRegistrationRequestDto;
 import sharing.app.com.dto.user.UserResponseDto;
 import sharing.app.com.dto.user.UserUpdateRequestDto;
@@ -38,10 +39,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDto updateUserRole(Long userId, User.Role newRole) {
+    public UserResponseDto updateUserRole(Long userId, RoleUpdateRequestDto requestDto) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new EntityNotFoundException("Can't find user by id " + userId));
-        user.setRole(newRole);
+        user.setRole(requestDto.getRole());
         userRepository.save(user);
         return userMapper.toUserResponse(user);
     }

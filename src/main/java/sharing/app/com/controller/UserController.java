@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sharing.app.com.dto.user.RoleUpdateRequestDto;
 import sharing.app.com.dto.user.UserResponseDto;
 import sharing.app.com.dto.user.UserUpdateRequestDto;
 import sharing.app.com.model.User;
@@ -22,9 +23,9 @@ public class UserController {
     @PreAuthorize("hasRole('MANAGER')")
     @PutMapping("/{id}/role")
     public UserResponseDto userUpdateRole(Authentication authentication,
-                                          @RequestBody User.Role newRole) {
+                                          @RequestBody RoleUpdateRequestDto requestDto) {
         Long userId = getUserId(authentication);
-        return userService.updateUserRole(userId, newRole);
+        return userService.updateUserRole(userId, requestDto);
     }
 
     @GetMapping("/me")
@@ -34,7 +35,7 @@ public class UserController {
 
     @PutMapping("/me")
     public UserResponseDto userResponseDto(Authentication authentication,
-                                           UserUpdateRequestDto requestDto) {
+                                           @RequestBody UserUpdateRequestDto requestDto) {
         return userService.updateUserProfile(authentication, requestDto);
     }
 
