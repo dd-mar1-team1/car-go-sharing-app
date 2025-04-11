@@ -1,6 +1,7 @@
 package sharing.app.com.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import sharing.app.com.exception.RegistrationException;
 import sharing.app.com.security.AuthenticationService;
 import sharing.app.com.service.user.UserService;
 
+@Tag(name = "Authentication management", description = "endpoints for managing authentication")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/auth")
