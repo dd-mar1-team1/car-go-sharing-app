@@ -19,6 +19,7 @@ import sharing.app.com.model.Payment;
 import sharing.app.com.model.Rental;
 import sharing.app.com.repository.payment.PaymentRepository;
 import sharing.app.com.repository.rental.RentalRepository;
+import sharing.app.com.service.telegram.TelegramNotificationService;
 
 @RequiredArgsConstructor
 @Service
@@ -27,6 +28,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentMapper paymentMapper;
     private final RentalRepository rentalRepository;
     private final StripeConfig stripeConfig;
+    private final TelegramNotificationService telegramService;
 
     @Override
     public Page<PaymentDto> getPaymentsByUser(Long userId, Pageable pageable) {
@@ -77,6 +79,7 @@ public class PaymentServiceImpl implements PaymentService {
         );
         payment.setStatus(Payment.Status.PAID);
         paymentRepository.save(payment);
+        telegramService.sendMessage("Successful payment ");
         return paymentMapper.toDto(payment);
     }
 

@@ -15,6 +15,7 @@ import sharing.app.com.model.User;
 import sharing.app.com.repository.car.CarRepository;
 import sharing.app.com.repository.rental.RentalRepository;
 import sharing.app.com.repository.user.UserRepository;
+import sharing.app.com.service.telegram.TelegramNotificationService;
 
 @RequiredArgsConstructor
 @Service
@@ -23,6 +24,7 @@ public class RentalServiceImpl implements RentalService {
     private final RentalRepository rentalRepository;
     private final RentalMapper rentalMapper;
     private final UserRepository userRepository;
+    private final TelegramNotificationService telegramService;
 
     @Override
     public RentalDto createRental(CreateRentalRequestDto requestDto) {
@@ -39,6 +41,7 @@ public class RentalServiceImpl implements RentalService {
         carRepository.save(car);
         Rental rental = createRentalRecord(requestDto, car);
         rentalRepository.save(rental);
+        telegramService.sendMessage("New lease created: " + "Auto: " + car.getModel());
         return rentalMapper.toDto(rental);
     }
 
@@ -78,6 +81,7 @@ public class RentalServiceImpl implements RentalService {
         carRepository.save(car);
 
         rentalRepository.save(rental);
+        telegramService.sendMessage("Rental completed: Auto: " + car.getModel() + " returned");
         return rentalMapper.toDto(rental);
     }
 
