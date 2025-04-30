@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import sharing.app.com.dto.car.CarDto;
 import sharing.app.com.dto.car.CreateCarRequestDto;
@@ -30,6 +32,7 @@ public class CarController {
             description = "Add a new car to the inventory. Only managers can add cars.")
     @PreAuthorize("hasRole('MANAGER')")
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public CarDto createCar(@RequestBody @Valid CreateCarRequestDto requestDto) {
         return carService.createCar(requestDto);
     }
@@ -46,6 +49,7 @@ public class CarController {
             description = "Delete a car from the inventory. Only managers can delete cars.")
     @PreAuthorize("hasRole('MANAGER')")
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         carService.deleteById(id);
     }

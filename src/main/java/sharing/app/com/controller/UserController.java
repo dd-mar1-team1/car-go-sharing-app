@@ -2,6 +2,7 @@ package sharing.app.com.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -42,7 +43,7 @@ public class UserController {
     @Operation(summary = "Update current user profile",
             description = "Update the profile information of the currently authenticated user")
     @PutMapping("/me")
-    public UserResponseDto userResponseDto(Authentication authentication,
+    public UserResponseDto userResponseDto(Authentication authentication, @Valid
                                            @RequestBody UserUpdateRequestDto requestDto) {
         return userService.updateUserProfile(authentication, requestDto);
     }

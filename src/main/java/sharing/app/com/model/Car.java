@@ -11,9 +11,11 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
+@Accessors(chain = true)
 @Getter
 @Setter
 @SQLDelete(sql = "UPDATE cars SET is_deleted = true WHERE id=?")

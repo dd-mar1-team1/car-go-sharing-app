@@ -6,8 +6,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import sharing.app.com.model.Car;
 
+@Accessors(chain = true)
 @Data
 public class CreateCarRequestDto {
     @NotBlank

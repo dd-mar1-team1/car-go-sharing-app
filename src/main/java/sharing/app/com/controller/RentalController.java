@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import sharing.app.com.dto.rental.CreateRentalRequestDto;
 import sharing.app.com.dto.rental.RentalDto;
@@ -30,6 +32,7 @@ public class RentalController {
     @Operation(summary = "Create a new rental",
             description = "Create a new rental and decrease car inventory by 1.")
     @PreAuthorize("hasRole('CUSTOMER')")
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public RentalDto createRental(@RequestBody @Valid CreateRentalRequestDto requestDto) {
         return rentalService.createRental(requestDto);

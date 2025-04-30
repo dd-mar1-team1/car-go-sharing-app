@@ -8,7 +8,7 @@ import sharing.app.com.exception.EntityNotFoundException;
 import sharing.app.com.repository.user.UserRepository;
 
 @RequiredArgsConstructor
-@Service
+@Service("userDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 

@@ -37,4 +37,8 @@ services:
       JWT_EXPIRATION: "$JWT_EXPIRATION"
       JWT_SECRET: "$JWT_SECRET"
 
+      BOT_NAME: "$BOT_NAME"
+      BOT_TOKEN: "$BOT_TOKEN"
+      BOT_CHAT_ID: "$BOT_CHAT_ID"
+
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:$DEBUG_PORT"
