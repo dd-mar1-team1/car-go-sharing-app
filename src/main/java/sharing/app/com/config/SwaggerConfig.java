@@ -9,19 +9,25 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
+    private static final String API = "Bookstore API";
+    private static final String VERSION = "1.0";
+    private static final String DESCRIPTION = "API for bookstore management";
+    private static final String BEARERAUTH = "BearerAuth";
+    private static final String BEARER = "bearer";
+    private static final String JWT = "JWT";
 
     @Bean
     public OpenAPI customOpenApi() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Bookstore API")
-                        .version("1.0")
-                        .description("API for bookstore management"))
-                .addSecurityItem(new SecurityRequirement().addList("BearerAuth"))
-                .schemaRequirement("BearerAuth", new SecurityScheme()
-                        .name("BearerAuth")
+                        .title(API)
+                        .version(VERSION)
+                        .description(DESCRIPTION))
+                .addSecurityItem(new SecurityRequirement().addList(BEARERAUTH))
+                .schemaRequirement(BEARERAUTH, new SecurityScheme()
+                        .name(BEARERAUTH)
                         .type(SecurityScheme.Type.HTTP)
-                        .scheme("bearer")
-                        .bearerFormat("JWT"));
+                        .scheme(BEARER)
+                        .bearerFormat(JWT));
     }
 }

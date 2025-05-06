@@ -1,9 +1,9 @@
 package sharing.app.com.dto.car;
 
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -18,7 +18,7 @@ public class CreateCarRequestDto {
     private String brand;
     @NotNull
     private Car.Type type;
-    @Min(value = 0)
+    @Positive
     private int inventory;
     @NotNull
     @DecimalMin(value = "0.0")

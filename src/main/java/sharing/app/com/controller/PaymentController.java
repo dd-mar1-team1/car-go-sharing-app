@@ -2,6 +2,7 @@ package sharing.app.com.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +36,7 @@ public class PaymentController {
             description = "Create a payment session using Stripe for car rental.")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public PaymentDto createPaymentSession(@RequestBody CreatePaymentRequestDto requestDto) {
+    public PaymentDto createPaymentSession(@RequestBody @Valid CreatePaymentRequestDto requestDto) {
         return paymentService.createPaymentSession(requestDto);
     }
 

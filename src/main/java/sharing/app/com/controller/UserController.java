@@ -43,8 +43,8 @@ public class UserController {
     @Operation(summary = "Update current user profile",
             description = "Update the profile information of the currently authenticated user")
     @PutMapping("/me")
-    public UserResponseDto userResponseDto(Authentication authentication, @Valid
-                                           @RequestBody UserUpdateRequestDto requestDto) {
+    public UserResponseDto userResponseDto(Authentication authentication,
+                                           @RequestBody @Valid UserUpdateRequestDto requestDto) {
         return userService.updateUserProfile(authentication, requestDto);
     }
 

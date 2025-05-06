@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sharing.app.com.config.StripeConfig;
 import sharing.app.com.dto.payment.CreatePaymentRequestDto;
 import sharing.app.com.dto.payment.PaymentDto;
@@ -21,6 +22,7 @@ import sharing.app.com.repository.payment.PaymentRepository;
 import sharing.app.com.repository.rental.RentalRepository;
 import sharing.app.com.service.telegram.TelegramNotificationService;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class PaymentServiceImpl implements PaymentService {
@@ -127,7 +129,7 @@ public class PaymentServiceImpl implements PaymentService {
         try {
             payment.setSessionUrl(new URL(session.getUrl()));
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Invalid session URL: " + session.getUrl(), e);
         }
         return payment;
     }
